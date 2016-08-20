@@ -5,7 +5,7 @@ import javax.microedition.midlet.MIDletStateChangeException;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 public class newTShirtRobot extends IterativeRobot {
-
+public Victor
 	public void disabledInit() {
 		// TODO Auto-generated method stub
 		super.disabledInit();
