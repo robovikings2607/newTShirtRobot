@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.Victor;
 
 public class Transmission implements SpeedController {
 public Victor victor1, victor2;
-public Transmission ( int deviceID ) {
+public Transmission ( int[] deviceID ) {
 	victor1 = new Victor (deviceID[0]);
 	victor2 = new Victor (deviceID[1]);
 }
@@ -26,7 +26,8 @@ public Transmission ( int deviceID ) {
 
 	public void set(double arg0) {
 		// TODO Auto-generated method stub
-
+		victor1.set(arg0) ;
+		victor2.set(arg0) ;
 	}
 
 	public void set(double arg0, byte arg1) {
