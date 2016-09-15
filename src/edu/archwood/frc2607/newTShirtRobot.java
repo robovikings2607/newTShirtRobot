@@ -12,24 +12,25 @@ public class newTShirtRobot extends IterativeRobot {
 	public Transmission transmissionL, transmissionR ;
 	public RobotDrive robotDrive ;
 	public Relay horn ;
-public RobovikingStick joystick ;
+	public RobovikingStick joystick ;
 	public Victor turntable ;
-
+	private int cnt = 0;
+	
 	public void disabledInit() {
 		// TODO Auto-generated method stub
-		super.disabledInit();
+//		super.disabledInit();
 	}
 
 	public void disabledPeriodic() {
 		// TODO Auto-generated method stub
-		super.disabledPeriodic();
+//		super.disabledPeriodic();
 	}
 
 	public void robotInit() {
 		// TODO Auto-generated method stub
-		super.robotInit();
-		transmissionL = new Transmission (Constants.leftMotorPorts) ;
-		transmissionR = new Transmission (Constants.rightMotorPorts) ;
+//		super.robotInit();
+		transmissionL = new Transmission ("Left", Constants.leftMotorPorts) ;
+		transmissionR = new Transmission ("Right", Constants.rightMotorPorts) ;
 		robotDrive = new RobotDrive (transmissionL, transmissionR) ;
 		horn = new Relay (7) ;
 		joystick = new RobovikingStick (1) ;
@@ -43,8 +44,9 @@ public RobovikingStick joystick ;
 
 	public void teleopPeriodic() {
 		// TODO Auto-generated method stub
-		super.teleopPeriodic();
-		robotDrive.arcadeDrive(-joystick.getRawAxisWithDeadzone(RobovikingStick.xBoxLeftStickY), joystick.getRawAxisWithDeadzone(RobovikingStick.xBoxRightStickX));
+//		super.teleopPeriodic();
+		
+		robotDrive.arcadeDrive(-joystick.getRawAxis(RobovikingStick.xBoxLeftStickY + 1), joystick.getRawAxis(RobovikingStick.xBoxRightStickX + 1));
 		if (joystick.getRawButton(RobovikingStick.xBoxLeftBumper)){
 			turntable.set(.6); 
 		} else if (joystick.getRawButton(RobovikingStick.xBoxRightBumper)) {
@@ -54,5 +56,23 @@ public RobovikingStick joystick ;
 		}
 	}
 
-
+	public void testPeriodic() {
+		if (joystick.getRawButton(RobovikingStick.xBoxButtonY)) {
+			robotDrive.arcadeDrive(1.0,0.0);
+		} else if (joystick.getRawButton(RobovikingStick.xBoxButtonA)) {
+			robotDrive.arcadeDrive(-1.0, 0.0);
+		} else if (joystick.getRawButton(RobovikingStick.xBoxButtonX)) {
+			robotDrive.arcadeDrive(0.0, -1.0);
+		} else if (joystick.getRawButton(RobovikingStick.xBoxButtonB)) {
+			robotDrive.arcadeDrive(0.0, 1.0);
+		} else {
+			robotDrive.arcadeDrive(0.0,0.0);
+		}
+		if (++cnt > 50) {
+			System.out.println("Y: " + joystick.getRawAxis(RobovikingStick.xBoxLeftStickY + 1));
+			System.out.println("X: " + joystick.getRawAxis(RobovikingStick.xBoxLeftStickX + 1));
+			System.out.println("");
+			cnt = 0;
+		}
+	}
 }
