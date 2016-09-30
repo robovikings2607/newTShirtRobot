@@ -46,7 +46,7 @@ public class newTShirtRobot extends IterativeRobot {
 		// TODO Auto-generated method stub
 //		super.teleopPeriodic();
 		
-		robotDrive.arcadeDrive(-joystick.getRawAxis(RobovikingStick.xBoxLeftStickY + 1), joystick.getRawAxis(RobovikingStick.xBoxRightStickX + 1));
+		robotDrive.arcadeDrive(-joystick.getRawAxis(RobovikingStick.xBoxLeftStickY + 1), -joystick.getRawAxis(RobovikingStick.xBoxRightStickX + 1));
 		if (joystick.getRawButton(RobovikingStick.xBoxLeftBumper)){
 			turntable.set(.6); 
 		} else if (joystick.getRawButton(RobovikingStick.xBoxRightBumper)) {
@@ -58,19 +58,15 @@ public class newTShirtRobot extends IterativeRobot {
 
 	public void testPeriodic() {
 		if (joystick.getRawButton(RobovikingStick.xBoxButtonY)) {
-			robotDrive.arcadeDrive(1.0,0.0);
+			robotDrive.arcadeDrive(.3,0.0);
 		} else if (joystick.getRawButton(RobovikingStick.xBoxButtonA)) {
-			robotDrive.arcadeDrive(-1.0, 0.0);
-		} else if (joystick.getRawButton(RobovikingStick.xBoxButtonX)) {
-			robotDrive.arcadeDrive(0.0, -1.0);
-		} else if (joystick.getRawButton(RobovikingStick.xBoxButtonB)) {
-			robotDrive.arcadeDrive(0.0, 1.0);
+			robotDrive.arcadeDrive(-.3, 0.0);
 		} else {
 			robotDrive.arcadeDrive(0.0,0.0);
 		}
 		if (++cnt > 50) {
-			System.out.println("Y: " + joystick.getRawAxis(RobovikingStick.xBoxLeftStickY + 1));
-			System.out.println("X: " + joystick.getRawAxis(RobovikingStick.xBoxLeftStickX + 1));
+			System.out.println(transmissionL.getMotorOutputs());
+			System.out.println(transmissionR.getMotorOutputs());
 			System.out.println("");
 			cnt = 0;
 		}
