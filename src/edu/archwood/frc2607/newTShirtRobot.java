@@ -42,6 +42,7 @@ public class newTShirtRobot extends IterativeRobot {
 		honkyHorn = new Relay(Constants.hornRelayPort);
 		joystick = new RobovikingStick (Constants.controllerPort) ;
 		turntable = new Victor (Constants.turntableMotorPort) ;
+		armTiltinator = new Victor(Constants.armTiltMotorPort);
 		compressor = new Compressor (1,2) ;
 		compressor.start() ;
 	}
@@ -71,15 +72,24 @@ public class newTShirtRobot extends IterativeRobot {
 		}
 		
 		//Blinking the Light
-		if (joystick.getRawButton(RobovikingStick.xBoxButtonY)) {
+		if (joystick.getRawButton(RobovikingStick.xBoxButtonBack)) {
 			System.out.print("BLINKING (Y button)");
 			blinkyLight.set(Relay.Value.kForward);	
 		} else {
 			blinkyLight.set(Relay.Value.kOff);
 		}
 		
+		//Elevating the Arm
+		if (joystick.getRawButton (RobovikingStick.xBoxButtonY)) {
+			armTiltinator.set(0.2);
+		}else if (joystick.getRawButton(RobovikingStick.xBoxButtonA)){
+			armTiltinator.set(-0.2);
+		}
+		else {
+			armTiltinator.set(0);
+		}
 		//Honking the horn
-		if(joystick.getRawButton(RobovikingStick.xBoxButtonX)){
+		if(joystick.getRawButton(RobovikingStick.xBoxButtonRightStick)){
 			System.out.println("HONKING!!! (X Button)");
 			honkyHorn.set(Relay.Value.kForward);
 		} else {
