@@ -1,7 +1,5 @@
 package edu.archwood.frc2607;
 
-import javax.microedition.midlet.MIDletStateChangeException;
-
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Relay;
@@ -19,6 +17,7 @@ public class newTShirtRobot extends IterativeRobot {
 	public Victor turntable ;
 	private int cnt = 0;
 	public Compressor compressor ;
+	public Relay pressureRelease ;
 	
 	public void disabledInit() {
 		// TODO Auto-generated method stub
@@ -45,6 +44,7 @@ public class newTShirtRobot extends IterativeRobot {
 		armTiltinator = new Victor(Constants.armTiltMotorPort);
 		compressor = new Compressor (1,2) ;
 		compressor.start() ;
+		pressureRelease = new Relay (Constants.shootyCannon);
 	}
 
 	public void teleopInit() {
@@ -69,6 +69,13 @@ public class newTShirtRobot extends IterativeRobot {
 			turntable.set(-.6);
 		} else {
 			turntable.set(0.0);
+		}
+		//Shooting the Cannon
+		if (joystick.getTriggerPressed(RobovikingStick.xBoxRightTrigger + 1)){
+			pressureRelease.set (Relay.Value.kForward);
+		}
+		else {
+			pressureRelease.set (Relay.Value.kOff);
 		}
 		
 		//Blinking the Light

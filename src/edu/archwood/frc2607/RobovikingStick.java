@@ -9,8 +9,10 @@ package edu.archwood.frc2607;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
- *
- * @author Driver
+ * Custom joystick class of the Fighting Robovikings. Includes additional methods
+ * for handling controller input.
+ * @author The Fighting Robovikings
+ * @version for cRIO
  */
 public class RobovikingStick extends Joystick {  
 	 
