@@ -1,0 +1,12 @@
+bin/**
+build/**
+output/**
+.gradle/**
+out/**
+image.*
+robot.*
+/.gradle/
+/bin/
+.settings/
+.classpath
+.project
